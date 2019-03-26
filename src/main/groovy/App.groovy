@@ -4,7 +4,7 @@ import io.javalin.Javalin
 import org.slf4j.LoggerFactory
 
 class App {
-    def final private static logger = LoggerFactory.getLogger(App.class)
+    def final private static logger = LoggerFactory.getLogger(App)
 
     static void main(String... args) {
         def app = Javalin.create()
