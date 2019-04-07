@@ -11,10 +11,14 @@ class App {
                 .disableStartupBanner()
                 .contextPath(System.getenv('CONTEXT_ROOT') ?: '/')
                 .disableDynamicGzip()
+
+        app.requestLogger({ ctx, timeMs ->
+            logger.info("${ctx.method()} ${ctx.path()} returns ${ctx.status()} in ${timeMs}ms")
+        })
         app.get("/hello", { ctx -> ctx.json([payload: 'Hello.']) })
 
-        def port = System.getenv('PORT') ?: 8888
-        app.start(port as Integer)
+        def port = System.getenv('PORT')?.toInteger() ?: 8888
+        app.start(port)
         logger.info("listening on port $port")
     }
 }
